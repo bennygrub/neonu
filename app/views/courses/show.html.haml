@@ -20,3 +20,9 @@
   %dd= @course.total_time
   %dt Image:
   %dd= @course.image
+
+%dl.dl-horizontal
+  .text-center
+    =link_to course_lessons_path(@course) do
+      .btn.btn-success
+        Lesson Plan

@@ -1,0 +1,9 @@
+.page-header
+  = link_to course_lessons_path(@course), class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  %h1 
+    Adding a new lesson for
+    =@course.name
+
+= render 'form'

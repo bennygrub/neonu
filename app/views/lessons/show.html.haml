@@ -1,0 +1,20 @@
+.page-header
+  = link_to course_lessons_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_course_lesson_path(@course, @lesson), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show lesson
+
+%dl.dl-horizontal
+  %dt Course:
+  %dd= @lesson.course_id
+  %dt Name:
+  %dd= @lesson.name
+  %dt Description:
+  %dd= @lesson.description
+  %dt Video:
+  %dd= @lesson.video
+  %dt Order:
+  %dd= @lesson.order

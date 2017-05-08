@@ -1,4 +1,4 @@
-= form_for @course, html: { class: "form-horizontal", role: "form" } do |f|
+= form_for @course, html: { class: "form-horizontal", role: "form", multipart: true } do |f|
   -if @course.errors.any?
     .alert.alert-danger.alert-dismissable{role: "alert"}
       %button.close{type: "button", data: {dismiss: "alert"} }
@@ -33,7 +33,8 @@
   .form-group
     = f.label :image, class: 'col-sm-2 control-label'
     .col-sm-10
-      = f.text_field :image, class: 'form-control'
+      = f.file_field :image, class: 'form-control'
+      = f.hidden_field :image_cache
   .form-group
     .col-sm-offset-2.col-sm-10
       = f.submit class: 'btn btn-primary'
