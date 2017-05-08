@@ -1,0 +1,17 @@
+#lesson-menu
+  #toggle-playlist
+    .text-center
+      %span.glyphicon.glyphicon.glyphicon-menu-hamburger
+  %h4.text-center
+    =@course.name
+  %ul    
+    -@course.lessons.each do |lesson|
+      %li
+        %span.glyphicon.glyphicon-play-circle
+        =lesson.name
+        .lesson-description
+          =lesson.description
+
+#player
+  .current-video.embed-responsive.embed-responsive-16by9.text-center
+    %iframe{:src => "https://player.vimeo.com/video/133112174?title=0&byline=0&portrait=0"}

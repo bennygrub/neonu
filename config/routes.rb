@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   
   resources :courses do
+    member do
+      get :player
+    end
     resources :lessons
   end
-
   get 'pages/home'
 
   devise_for :users
