@@ -31,26 +31,35 @@ input[type="radio"], input[type="checkbox"] {
     list-style-type: none;
     margin: 0px;
     padding: 0px;
-    
-    li{
-      padding:20px 10px;
-      border-bottom:1px solid #35eea2;
-      font-weight:100;
-      font-size:16px;
-      &:hover{
-        background:#35eea2;
-        color:black;
-        cursor:pointer;
+    a{
+      li{
+        padding:20px 10px;
+        border-bottom:1px solid #35eea2;
+        font-weight:100;
+        font-size:16px;
+        color:white;
+        &:hover{
+          background:#35eea2;
+          color:black;
+          cursor:pointer;
+        }
+        .lesson-description{
+          font-size:12px;
+        }
       }
-      .lesson-description{
-        font-size:12px;
+      li:first-child{
+        border-top:1px solid #35eea2;
+      }
+      &:hover, &:active, &:visited, &:focus{
+        text-decoration:none;
       }
     }
-    li:first-child{
-      border-top:1px solid #35eea2;
-    }
+
   }
+  .active-lesson{background:#349b70;transition: all 0.2s ease-in-out;}
+
   #toggle-playlist{
+    cursor:pointer;
     width:52px;
     position: absolute;
     right: 100%;
@@ -58,8 +67,11 @@ input[type="radio"], input[type="checkbox"] {
     background:#35eea2;
     height: 50px;
     line-height: 50px;
+    color:black;
+    font-weight:100;
+    font-size: 20px;
   }
-
+  transition: all 0.2s ease-in-out;
   position:fixed;
   top:0;
   right:0;
@@ -71,4 +83,10 @@ input[type="radio"], input[type="checkbox"] {
   box-shadow: 1px 1px 11px 5px rgba(0,0,0,0.3);
   height:100%;
   width: 400px;
+}
+
+#player{
+  max-width:900px;
+  margin:auto;
+  position:relative;
 }

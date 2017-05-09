@@ -6,12 +6,72 @@
     =@course.name
   %ul    
     -@course.lessons.each do |lesson|
-      %li
-        %span.glyphicon.glyphicon-play-circle
-        =lesson.name
-        .lesson-description
-          =lesson.description
+      =link_to "#" do 
+        %li{data: {list_lesson:lesson.id}}
+          %span.glyphicon.glyphicon-play-circle
+          =lesson.name
+          .lesson-description
+            =lesson.description
 
-#player
-  .current-video.embed-responsive.embed-responsive-16by9.text-center
-    %iframe{:src => "https://player.vimeo.com/video/133112174?title=0&byline=0&portrait=0"}
+#player{data: {lesson: @course.lessons.first.id, course: @course.id}}
+  .col-xs-12
+    .current-video.embed-responsive.embed-responsive-16by9.text-center
+      %iframe{:src => "https://player.vimeo.com/video/133112174?title=0&byline=0&portrait=0"}
+    %h1.current-name
+      =@course.lessons.first.name
+
+    .current-description
+
+
+:coffee
+  
+  #Functions
+  setActive = ->
+    currentLesson = $("#player").attr("data-lesson")
+    $('[data-list-lesson='+currentLesson+']').addClass("active-lesson")
+  
+  removeInactive = ->
+    $('[data-list-lesson='+$("#player").attr("data-lesson")+']').removeClass("active-lesson")
+  
+  setPlayer = ->
+    currentLesson = $("#player").attr("data-lesson")
+    course = $("#player").attr("data-course")
+    $.ajax
+      dataType: 'text'
+      url: '/courses/'+course+'/lessons/'+currentLesson+'.json'
+      type: 'GET'
+      success: (json) ->
+        result = $.parseJSON(json)
+        $(".current-name").html(result["name"])
+        $(".current-description").html(result["description"])
+        $("#player iframe").attr('src', 'https://player.vimeo.com/video/132445906?title=0&byline=0&portrait=0')
+
+
+
+
+
+
+  #Live
+  setActive()
+
+  $("#lesson-menu li").click ->
+    removeInactive()
+    newLesson = $(this).data("list-lesson")
+    $("#player").attr('data-lesson', newLesson)
+    setActive()
+    setPlayer()
+
+
+  $('#toggle-playlist').click ->
+    if $('#lesson-menu').css("right") == "0px"
+      togglePlaylist = "-400px"
+      togglePlayer = "0px"
+    else
+      togglePlaylist = "0px"
+      togglePlayer = "200px"
+    $('#lesson-menu').animate {
+      'right': togglePlaylist
+    }, 200
+
+
+
